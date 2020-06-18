@@ -1,33 +1,33 @@
 {
-  "name": "@editorjs/marker",
-  "version": "1.2.2",
-  "keywords": [
-    "codex editor",
-    "marker",
-    "tool",
-    "editor.js",
-    "editorjs"
-  ],
-  "description": "Marker Tool for Editor.js",
-  "license": "MIT",
-  "repository": "https://github.com/editor-js/marker",
+  "name": "editorjs-text-color-plugin",
+  "version": "1.0.0",
+  "description": "Text Color Tool for Editor.js",
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch"
   },
-  "author": {
-    "name": "CodeX",
-    "email": "team@codex.so"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flaming-cl/editorjs-text-color-plugin.git"
   },
+  "keywords": [
+    "['editor'",
+    "'editorjs'",
+    "'text color picker']"
+  ],
+  "author": "flaming-cl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flaming-cl/editorjs-text-color-plugin/issues"
+  },
+  "homepage": "https://github.com/flaming-cl/editorjs-text-color-plugin#readme",
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^1.0.0",
-    "raw-loader": "^3.1.0",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "raw-loader": "^4.0.1",
+    "style-loader": "^1.2.1"
   }
 }

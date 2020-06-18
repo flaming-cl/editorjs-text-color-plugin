@@ -2,7 +2,9 @@
 
 # Text Color Tool
 
-Text Color Tool for highlighting text-fragments for the [Editor.js](https://editorjs.io).
+A simple tool for coloring text-fragments for the [Editor.js](https://editorjs.io).  
+
+![image](https://user-images.githubusercontent.com/51183663/85028477-b1e11c00-b1ad-11ea-91a5-7a2dc3399e74.png)
 
 ## Installation
 
