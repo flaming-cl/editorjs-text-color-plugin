@@ -1,0 +1,1 @@
+# editorjs-text-color-plugin
