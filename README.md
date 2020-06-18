@@ -63,3 +63,8 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 }
 ```
 
+## Credits
+UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan
+
+## License
+[MIT](https://github.com/flaming-cl/editorjs-text-color-plugin/blob/master/LICENSE)
