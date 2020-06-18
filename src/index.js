@@ -64,6 +64,7 @@ class Color {
     this.button.type = 'button';
     this.button.className = 'text-color-btn';
     this.button.classList.add(this.iconClasses.base);
+
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) { _this.color = value; },
       defaultColor: this.config.defaultColor,
@@ -73,11 +74,12 @@ class Color {
     this.api.listeners.on(this.button, 'click', (ev) => {
       _this.colorBtnClicked = ev.target.id === 'color-fire-btn';
     }, false);
+
     return this.button;
   }
 
   /**
-   * Coloring selected fragment
+   * handle selected fragment
    *
    * @param {Range} range - selected fragment
    */
@@ -93,26 +95,19 @@ class Color {
   }
 
   /**
-   * Wrap selection with term-tag
+   * color selected fragment (will overwrite existing color tags)
    *
    * @param {Range} range - selected fragment
    */
   coloring(range) {
     /**
-     * Create a wrapper for highlighting
+     * Create a wrapper for text coloring
      */
     let colorer = document.createElement(this.tag);
     colorer.classList.add(Color.CSS);
-
-    /**
-     * SurroundContent throws an error if the Range splits a non-Text node with only one of its boundary points
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Range/surroundContents}
-     *
-     * // range.surroundContents(span);
-     */
     colorer.appendChild(range.extractContents());
 
-    this.unwrap(colorer);
+    this.overwriteOldColorTags(colorer);
 
     colorer.style.color = this.color;
 
@@ -124,11 +119,11 @@ class Color {
   }
 
   /**
-   * Unwrap term-tag
+   * overwrite existing color tags
    *
-   * @param {HTMLElement} termWrapper - term wrapper tag
+   * @param {HTMLElement} colorer - new color tag
    */
-  unwrap(colorer) {
+  overwriteOldColorTags(colorer) {
     /**
      * Expand selection to all term-tag
      */

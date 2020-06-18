@@ -20,15 +20,6 @@ Include module at your application
 const Color = require('editorjs-text-color-plugin');
 ```
 
-### Download to your project's source dir
-
-1. Upload folder `dist` from repository
-2. Add `dist/bundle.js` file to your page.
-
-```html
-<script src="..."></script>
-```
-
 ## Usage
 
 Add a new Tool to the `tools` property of the Editor.js initial config.
