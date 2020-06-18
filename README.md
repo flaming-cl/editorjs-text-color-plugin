@@ -4,7 +4,7 @@
 
 A simple tool for coloring text-fragments for the [Editor.js](https://editorjs.io).  
 
-![image](https://user-images.githubusercontent.com/51183663/85029457-e0abc200-b1ae-11ea-9b4f-d829bfbc66ef.png)
+![image](https://user-images.githubusercontent.com/51183663/85031683-8d873e80-b1b1-11ea-83d7-50e65dc0f952.png)
 
 ## Installation
 
