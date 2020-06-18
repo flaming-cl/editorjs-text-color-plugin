@@ -64,16 +64,12 @@ class Color {
     this.button.type = 'button';
     this.button.className = 'text-color-btn';
     this.button.classList.add(this.iconClasses.base);
-
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) { _this.color = value; },
       defaultColor: this.config.defaultColor,
       colorCollections: this.config.colorCollections
     });
     this.button.appendChild(colorPicker);
-    this.api.listeners.on(this.button, 'click', (ev) => {
-      _this.colorBtnClicked = ev.target.id === 'color-fire-btn';
-    }, false);
 
     return this.button;
   }
