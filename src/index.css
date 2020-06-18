@@ -20,13 +20,6 @@
   padding: 5px;
 }
 
-.color-btn {
-  padding: 2px;
-  font-weight: bold;
-  color: #868686;
-  cursor: pointer;
-}
-
-.color-btn:hover {
-  color: #48494c;
+.text-color-btn {
+  cursor: default;
 }

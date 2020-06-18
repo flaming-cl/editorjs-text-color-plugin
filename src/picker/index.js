@@ -1,6 +1,6 @@
 import './components/xy-popover.js';
 import { parseToHSVA, HSVaColor } from './utils/main';
-const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#009688','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#FF5722','#795548','#9E9E9E','#5A5A5A','#FFF'];
+const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
 
