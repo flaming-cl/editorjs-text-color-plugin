@@ -1,0 +1,32 @@
+.color-plugin{
+  background: white;
+  padding: 3px 0;
+  z-index: -99;
+}
+
+.picker_wrapper.popup {
+  z-index: 99;
+  width: 170px;
+  margin: 0;
+  box-shadow: 0 0 10px 1px #eaeaea;
+  background: #ffffff;
+}
+
+.picker_arrow {
+  display: none;
+}
+
+.layout_default .picker_slider, .layout_default .picker_selector {
+  padding: 5px;
+}
+
+.color-btn {
+  padding: 2px;
+  font-weight: bold;
+  color: #868686;
+  cursor: pointer;
+}
+
+.color-btn:hover {
+  color: #48494c;
+}

@@ -1,1 +1,72 @@
-# editorjs-text-color-plugin
+![](https://badgen.net/badge/Editor.js/v2.0/blue)
+
+# Text Color Tool
+
+Text Color Tool for highlighting text-fragments for the [Editor.js](https://editorjs.io).
+
+## Installation
+
+### Install via NPM
+
+Get the package
+
+```shell
+npm i --save-dev editorjs-text-color-plugin
+```
+
+Include module at your application
+
+```javascript
+const Color = require('editorjs-text-color-plugin');
+```
+
+### Download to your project's source dir
+
+1. Upload folder `dist` from repository
+2. Add `dist/bundle.js` file to your page.
+
+```html
+<script src="..."></script>
+```
+
+## Usage
+
+Add a new Tool to the `tools` property of the Editor.js initial config.
+
+```javascript
+var editor = EditorJS({
+  ...
+  
+  tools: {
+    ...
+    Color: {
+      class: Color,
+      colorCollections: ['#ff1300','#EC7878','#9C27B0'],
+      defaultColor: '#ff1300',
+    }
+  },
+  
+  ...
+});
+```
+
+## Config Params (optional)
+
+| Field  | Type     | Description      |
+| ------ | -------- | ---------------- |
+| colorCollections  | `array` | colors available in the palette |
+| defaultColor  | `string` | default color |
+
+## Output data
+
+Colored text will be wrapped with a `color` tag with an `color-plugin` class.
+
+```json
+{
+    "type" : "text",
+    "data" : {
+        "text" : "sqrt(75 / 3) + <color class='color-plugin'>det([[-1, 2], [3, 1]]) - sin(pi / 4)^2</color>"
+    }
+}
+```
+
