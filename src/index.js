@@ -8,11 +8,6 @@ require('./index.css').toString();
  * Text Color Tool for Editor.js
  */
 class Color {
-
-  static get CSS() {
-    return 'color-plugin';
-  };
-
   /**
    * @param {{api: object}}  - Editor.js API
    */
@@ -21,6 +16,9 @@ class Color {
     this.config = config;
     this.color = this.config.defaultColor;
     this.pluginType = this.config.type || 'text';
+    this.tagClassName = this.pluginType === 'marker'
+        ? 'marker-plugin'
+        : 'color-plugin';
 
     /**
      * Toolbar Button
@@ -34,7 +32,8 @@ class Color {
      *
      * @type {string}
      */
-    this.tag = 'color';
+    this.tag = this.pluginType === 'marker' ? 'marker' : 'color';
+
 
     /**
      * CSS classes
@@ -102,7 +101,7 @@ class Color {
      * Create a wrapper for text coloring
      */
     let colorer = document.createElement(this.tag);
-    colorer.classList.add(Color.CSS);
+    colorer.classList.add(this.tagClassName);
     colorer.appendChild(range.extractContents());
 
     this.overwriteOldColorTags(colorer);
@@ -130,7 +129,9 @@ class Color {
      * Expand selection to all term-tag
      */
     if (colorer.children.length) {
-      colorer.innerHTML = colorer.innerHTML.replace(/<\/?color[^>]*>/g,"");
+      colorer.innerHTML = this.pluginType === 'marker'
+          ? colorer.innerHTML.replace(/<\/?marker[^>]*>/g,"")
+          : colorer.innerHTML.replace(/<\/?color[^>]*>/g,"");
     }
   }
 
@@ -138,7 +139,7 @@ class Color {
    * Check and change Term's state for current selection
    */
   checkState() {
-    const termTag = this.api.selection.findParentTag(this.tag, Color.CSS);
+    const termTag = this.api.selection.findParentTag(this.tag, this.tagClassName);
 
     this.button.classList.toggle(this.iconClasses.active, !!termTag);
   }
@@ -150,7 +151,10 @@ class Color {
   static get sanitize() {
     return {
       color: {
-        class: Color.CSS
+        class: 'color-plugin'
+      },
+      marker: {
+        class: 'marker-plugin'
       }
     };
   }

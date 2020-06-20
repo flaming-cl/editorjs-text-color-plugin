@@ -115,7 +115,7 @@ class ColorPlugin extends HTMLElement {
         .color-fire-btn {
             font-size: 17px;
             font-weight: bold;
-            margin-left: 1px;
+            margin-left: 8px;
             text-shadow: 2px 0 0 #cab9b9;
         }
         </style>
