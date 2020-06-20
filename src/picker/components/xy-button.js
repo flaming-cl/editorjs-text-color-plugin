@@ -1,3 +1,4 @@
+
 export default class XyButton extends HTMLElement {
     //https://mladenplavsic.github.io/css-ripple-effect
     static get observedAttributes() { return ['disabled','icon','loading','href','htmltype'] }

@@ -18,8 +18,9 @@ class Color {
    */
   constructor({ config, api }) {
     this.api = api;
-    this.color = 'red';
     this.config = config;
+    this.color = this.config.defaultColor;
+    this.pluginType = this.config.type || 'text';
 
     /**
      * Toolbar Button
@@ -67,7 +68,8 @@ class Color {
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) { _this.color = value; },
       defaultColor: this.config.defaultColor,
-      colorCollections: this.config.colorCollections
+      colorCollections: this.config.colorCollections,
+      type: this.pluginType
     });
     this.button.appendChild(colorPicker);
 
@@ -105,7 +107,11 @@ class Color {
 
     this.overwriteOldColorTags(colorer);
 
-    colorer.style.color = this.color;
+    if (this.pluginType === 'marker') {
+      colorer.style.background = this.color;
+    } else {
+      colorer.style.color = this.color;
+    }
 
     range.insertNode(colorer);
     /**

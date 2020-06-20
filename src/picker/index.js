@@ -1,5 +1,6 @@
 import './components/xy-popover.js';
 import { parseToHSVA, HSVaColor } from './utils/main';
+import MARKER from '../picker/components/icon';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
@@ -12,6 +13,8 @@ class ColorPlugin extends HTMLElement {
         this.colorCollections = options.colorCollections || ColorCollections;
         this.onColorPicked = options.onColorPicked;
         this.defaulColor = options.defaulColor || '#ff1300';
+        this.pluginType = options.type;
+
         shadowRoot.innerHTML = `
         <style>
         :host{
@@ -40,7 +43,7 @@ class ColorPlugin extends HTMLElement {
         }
         .color-btn {
             border: 1px solid #cab9b9;
-            margin: 3px 2px 2px 2px;
+            margin: 7px 2px 2px 2px;
             width: 6px;
             height: 6px;
             opacity: 0.9;
@@ -117,7 +120,9 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <div class="color-fire-btn" id="color-fire-btn">A</div>
+            <div class="color-fire-btn" id="color-fire-btn">
+                ${this.pluginType === 'marker' ? MARKER : 'A' }
+            </div>
             <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
                 <xy-popcon id="popcon">

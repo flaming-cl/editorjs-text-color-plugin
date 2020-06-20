@@ -65,6 +65,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan
+Marker Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 ## License
 [MIT](https://github.com/flaming-cl/editorjs-text-color-plugin/blob/master/LICENSE)
