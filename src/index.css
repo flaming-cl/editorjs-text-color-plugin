@@ -1,7 +1,3 @@
-.color-plugin {
-  z-index: -99;
-}
-
 .picker_wrapper.popup {
   z-index: 99;
   width: 170px;
@@ -16,12 +12,4 @@
 
 .layout_default .picker_slider, .layout_default .picker_selector {
   padding: 5px;
-}
-
-.text-color-btn {
-  cursor: default;
-}
-
-.marker-icon {
-  width: 10px;
 }
