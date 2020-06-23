@@ -12,7 +12,7 @@ class ColorPlugin extends HTMLElement {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         this.colorCollections = options.colorCollections || ColorCollections;
         this.onColorPicked = options.onColorPicked;
-        this.defaulColor = options.defaulColor || '#ff1300';
+        this.defaulColor = options.defaulColor;
         this.pluginType = options.type;
 
         shadowRoot.innerHTML = `

@@ -14,7 +14,7 @@ class Color {
   constructor({ config, api }) {
     this.api = api;
     this.config = config;
-    this.color = this.config.defaultColor;
+    this.color = this.config.defaultColor || '#ff1300';
     this.pluginType = this.config.type || 'text';
     this.tagClassName = this.pluginType === 'marker'
         ? 'marker-plugin'
