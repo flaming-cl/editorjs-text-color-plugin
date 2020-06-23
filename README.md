@@ -64,13 +64,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 {
     "type" : "text",
     "data" : {
-        "text" : "sqrt(75 / 3) + <color class='color-plugin'>det([[-1, 2], [3, 1]]) - sin(pi / 4)^2</color>"
-    },
-}
-{
-    "type" : "text",
-    "data" : {
-        "text" : "<marker class="marker-plugin" style="background: rgb(0, 188, 212);">Plugin</marker>"
+        "text" : "<font color="#00bcd4">Color</font><span style="background-color: rgb(236, 120, 120);"><font color="#ffffff">Plugin</font></span>."
     },
 }
 ```
