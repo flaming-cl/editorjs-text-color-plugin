@@ -70,7 +70,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 {
     "type" : "text",
     "data" : {
-        "text" : "<marker class='marker-plugin'>Plugin</marker>"
+        "text" : "<marker class="marker-plugin" style="background: rgb(0, 188, 212);">Plugin</marker>"
     },
 }
 ```

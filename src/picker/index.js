@@ -12,7 +12,7 @@ class ColorPlugin extends HTMLElement {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         this.colorCollections = options.colorCollections || ColorCollections;
         this.onColorPicked = options.onColorPicked;
-        this.defaulColor = options.defaulColor || '#ff1300';
+        this.defaulColor = options.defaultColor || '#ff1300';
         this.pluginType = options.type;
 
         shadowRoot.innerHTML = `
@@ -118,10 +118,13 @@ class ColorPlugin extends HTMLElement {
             margin-left: 8px;
             text-shadow: 2px 0 0 #cab9b9;
         }
+        .color-fire-btn-text {
+            margin-right: 2px;
+        }
         </style>
         <section class="color-section">
             <div class="color-fire-btn" id="color-fire-btn">
-                ${this.pluginType === 'marker' ? MARKER : 'A' }
+                ${this.pluginType === 'marker' ? MARKER : '<div class="color-fire-btn-text">A</div>' }
             </div>
             <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
@@ -149,7 +152,7 @@ class ColorPlugin extends HTMLElement {
                 this.value = item.dataset.color;
                 this.onColorPicked(this.value);
             }
-        })
+        });
         this.value = this.defaultvalue;
     }
 
