@@ -1,7 +1,7 @@
 import './components/xy-popover.js';
 import { parseToHSVA, HSVaColor } from './utils/main';
 import MARKER from '../picker/components/icon';
-const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
+const ColorCollections = ['#FF1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
 
@@ -37,9 +37,11 @@ class ColorPlugin extends HTMLElement {
         xy-popover{
             width:100%;
             height:100%;
+            padding-right: 3px;            
+            margin-right: 7px;
         }
         xy-popover:hover {
-           cursor: pointer;
+            cursor: context-menu;
         }
         .color-btn {
             border: 1px solid #cab9b9;
@@ -117,6 +119,7 @@ class ColorPlugin extends HTMLElement {
             font-weight: bold;
             margin-left: 8px;
             text-shadow: 2px 0 0 #cab9b9;
+            padding-left: 8px;
         }
         .color-fire-btn-text {
             margin-right: 2px;
