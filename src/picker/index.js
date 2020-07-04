@@ -119,9 +119,9 @@ class ColorPlugin extends HTMLElement {
             height: 28px;
             padding-top: 7px;
             padding-right: 1px;
-            margin-left: 4px;
+            margin-left: 3px;
             text-shadow: 2px 0 0 #cab9b9;
-            padding-left: 5px;
+            padding-left: 3px;
             border-radius: 5px 0 0 5px;
         }
         .color-fire-btn:hover {
