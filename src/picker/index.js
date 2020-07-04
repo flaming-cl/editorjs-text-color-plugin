@@ -37,7 +37,7 @@ class ColorPlugin extends HTMLElement {
         xy-popover{
             width:100%;
             height:35px;
-            margin-right: 7px;
+            margin-right: 3px;
         }
         xy-popover:hover {
             border-radius: 0 5px 5px 0;
