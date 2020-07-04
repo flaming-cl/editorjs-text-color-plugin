@@ -1,7 +1,7 @@
 import './components/xy-popover.js';
 import { parseToHSVA, HSVaColor } from './utils/main';
 import MARKER from '../picker/components/icon';
-const ColorCollections = ['#FF1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
+const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
 
@@ -36,16 +36,16 @@ class ColorPlugin extends HTMLElement {
         }
         xy-popover{
             width:100%;
-            height:100%;
-            padding-right: 3px;            
+            height:35px;
             margin-right: 7px;
         }
         xy-popover:hover {
-            cursor: context-menu;
+            border-radius: 0 5px 5px 0;
+            background: rgba(203, 203, 203, 0.49);
         }
         .color-btn {
             border: 1px solid #cab9b9;
-            margin: 7px 2px 2px 2px;
+            margin: 18px 2px 2px 2px;
             width: 6px;
             height: 6px;
             opacity: 0.9;
@@ -97,11 +97,10 @@ class ColorPlugin extends HTMLElement {
         }
         .color-sign>button {
             position: relative;
-            width: 100%;
-            padding-bottom: 0;
-            padding-top: 100%;
-            border-radius: 4px;
-            border: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 6px;
+            border: 1px solid #b8b9b49e;
             outline: 0;
             opacity: 0.9;
         }
@@ -117,9 +116,20 @@ class ColorPlugin extends HTMLElement {
         .color-fire-btn {
             font-size: 17px;
             font-weight: bold;
-            margin-left: 8px;
+            height: 28px;
+            padding-top: 7px;
+            padding-right: 2px;
+            margin-left: 4px;
             text-shadow: 2px 0 0 #cab9b9;
-            padding-left: 8px;
+            padding-left: 4px;
+            border-radius: 5px 0 0 5px;
+        }
+        .color-fire-btn:hover {
+            font-size: 17px;
+            font-weight: bold;
+            text-shadow: 2px 0 0 #cab9b9;
+            background: rgba(203, 203, 203, 0.49);
+            border-radius: 5px 0 0 5px;
         }
         .color-fire-btn-text {
             margin-right: 2px;
