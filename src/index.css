@@ -15,5 +15,6 @@
 }
 
 .colorPlugin.ce-inline-tool {
-  width: 31px;
+  width: 29px;
+  border-radius: 3px;
 }
