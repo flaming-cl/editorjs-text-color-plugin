@@ -117,7 +117,7 @@ class ColorPlugin extends HTMLElement {
             font-size: 17px;
             font-weight: bold;
             height: 28px;
-            padding-top: 7px;
+            padding-top: 8px;
             padding-right: 1px;
             margin-left: 3px;
             text-shadow: 2px 0 0 #cab9b9;
