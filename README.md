@@ -2,7 +2,7 @@
 
 # Text Color Tool
 
-A simple tool for coloring text-fragments for the [Editor.js](https://editorjs.io).  
+A simple tool（ [Demo](https://flaming-cl.github.io/editorPlugin) ） for coloring text-fragments for the [Editor.js](https://editorjs.io).  
 
 ![image](https://user-images.githubusercontent.com/51183663/85190761-28853300-b2ee-11ea-9c11-13c3dbdef842.png)
 
@@ -22,7 +22,7 @@ Include module at your application
 const ColorPlugin = require('editorjs-text-color-plugin');
 ```
 
-## Load from CDN
+### Load from CDN
 <script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.1.22/dist/bundle.js"></script>
 
 ## Usage
