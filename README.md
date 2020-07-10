@@ -19,8 +19,11 @@ npm i --save-dev editorjs-text-color-plugin
 Include module at your application
 
 ```javascript
-const Color = require('editorjs-text-color-plugin');
+const ColorPlugin = require('editorjs-text-color-plugin');
 ```
+
+## Load from CDN
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.1.22/dist/bundle.js"></script>
 
 ## Usage
 
@@ -34,7 +37,7 @@ var editor = EditorJS({
     ...
 
     Color: {
-      class: Color,
+      class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
       config: {
          colorCollections: ['#FF1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
          defaultColor: '#FF1300',
@@ -42,7 +45,7 @@ var editor = EditorJS({
       }     
     },
     Marker: {
-      class: Color,
+      class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
       config: {
          defaultColor: '#FFBF00',
          type: 'marker', 
