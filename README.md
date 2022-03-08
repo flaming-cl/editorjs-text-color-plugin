@@ -23,7 +23,9 @@ const ColorPlugin = require('editorjs-text-color-plugin');
 ```
 
 ### Load from CDN
+```html
 <script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.1.22/dist/bundle.js"></script>
+```
 
 ## Usage
 
