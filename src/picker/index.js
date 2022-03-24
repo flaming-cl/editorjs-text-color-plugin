@@ -1,6 +1,6 @@
 import './components/xy-popover.js';
-import { parseToHSVA, HSVaColor } from './utils/main';
 import MARKER from '../picker/components/icon';
+import { handleCSSVariables } from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
@@ -50,8 +50,8 @@ class ColorPlugin extends HTMLElement {
             height: 6px;
             opacity: 0.9;
             padding: 1px 0 1px 0;
-            color: var(--themeColor,#42b983);
-            background: var(--themeColor,#42b983);
+            color: var(--themeColor, #42b983);
+            background: var(--themeColor, #42b983);
             font-weight: bolder;
             border-radius: 2px;
         }
@@ -163,6 +163,7 @@ class ColorPlugin extends HTMLElement {
             if(item){
                 this.nativeclick = true;
                 this.value = item.dataset.color;
+                this.value = handleCSSVariables(this.value);
                 this.onColorPicked(this.value);
             }
         });
@@ -175,10 +176,6 @@ class ColorPlugin extends HTMLElement {
 
     get value() {
         return this.$value;
-    }
-
-    get color() {
-        return HSVaColor(...parseToHSVA(this.$value).values);
     }
 
     get type() {
@@ -210,14 +207,13 @@ class ColorPlugin extends HTMLElement {
     }
 
     set value(value) {
-        this.colorBtn.style.setProperty('--themeColor',value);
+        this.colorBtn.style.setProperty('--themeColor', value);
         this.$value = value;
         if(this.nativeclick){
             this.nativeclick = false;
             this.dispatchEvent(new CustomEvent('change', {
                 detail: {
                     value: this.value,
-                    color: this.color
                 }
             }));
         } else {

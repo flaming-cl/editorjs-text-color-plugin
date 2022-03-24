@@ -41,7 +41,7 @@ var editor = EditorJS({
     Color: {
       class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
       config: {
-         colorCollections: ['#FF1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
+         colorCollections: ['var(--main-text-color)','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
          defaultColor: '#FF1300',
          type: 'text', 
       }     
@@ -81,6 +81,9 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 ```
 
 <marker class="marker-plugin" style="background: rgb(0, 188, 212);">Plugin</marker>
+
+## Recent Updates
+V1.1.3 Mar-24-2022 CSS variable Support for colorCollection  
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
