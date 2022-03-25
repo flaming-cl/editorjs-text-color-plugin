@@ -1,4 +1,4 @@
-![](https://badgen.net/badge/Editor.js/v2.0/blue)
+![](https://badgen.net/badge/Editor.js/v2.23.2/blue)
 
 # Text Color Tool
 
@@ -24,7 +24,7 @@ const ColorPlugin = require('editorjs-text-color-plugin');
 
 ### Load from CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.1.4/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@1.12.1/dist/bundle.js"></script>
 ```
 
 ## Usage
@@ -61,11 +61,11 @@ var editor = EditorJS({
 
 ## Config Params (optional)
 
-| Field  | Type     | Description                                                                                       |
-| ------ | -------- |---------------------------------------------------------------------------------------------------|
-| colorCollections  | `array` | Colors available in the palette. CSS variables, for example var(--main-text-color), are supported |
-| defaultColor  | `string` | Default color. CSS variables supported.                                                           |
-| type  | `string` | Set the plugin as a marker or a text color tool                                                   |
+| Field  | Type     | Description                                                                                                                            |
+| ------ | -------- |----------------------------------------------------------------------------------------------------------------------------------------|
+| colorCollections  | `array` | Colors available in the palette.   CSS variables, for example var(--main-text-color), are supported                                    |
+| defaultColor  | `string` | Default color (if you do not set up a default color, it will be the first color of your color collections).   CSS variables supported. |
+| type  | `string` | Set the plugin as a marker or a text color tool                                                                                        |
 
 ## Output data
 
@@ -81,9 +81,9 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 ```
 
 ## Recent Updates
-| Field  | Type        | Description                                           |
-|--------|-------------|-------------------------------------------------------|
-| V1.1.5 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor |
+| Field   | Type        | Description                                                                                                                                                          |
+|---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0) |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
