@@ -80,12 +80,10 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 }
 ```
 
-<marker class="marker-plugin" style="background: rgb(0, 188, 212);">Plugin</marker>
-
 ## Recent Updates
 | Field  | Type        | Description                                           |
 |--------|-------------|-------------------------------------------------------|
-| V1.1.4 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor |
+| V1.1.5 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
