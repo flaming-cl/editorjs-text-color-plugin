@@ -2,6 +2,7 @@
  * Build styles
  */
 const Picker = require('./picker');
+const { getDefaultColorCache } = require('./picker/utils/main');
 require('./index.css').toString();
 
 /**
@@ -15,8 +16,8 @@ class Color {
   constructor({ config, api }) {
     this.api = api;
     this.config = config;
-    this.color = this.config.defaultColor;
     this.pluginType = this.config.type || 'text';
+    this.color = getDefaultColorCache(this.config.defaultColor, this.pluginType);
 
     /**
      * Toolbar Button

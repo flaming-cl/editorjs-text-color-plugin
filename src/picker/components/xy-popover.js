@@ -111,7 +111,7 @@ class XyPopcon extends HTMLElement {
     }
 
     get title() {
-        return this.getAttribute('title')||'popcon';
+        return this.getAttribute('title') ||'popcon';
     }
 
     get type() {
@@ -119,15 +119,15 @@ class XyPopcon extends HTMLElement {
     }
 
     get oktext() {
-        return this.getAttribute('oktext')||'确 定';
+        return this.getAttribute('oktext') || 'confirm';
     }
 
     get canceltext() {
-        return this.getAttribute('canceltext')||'取 消';
+        return this.getAttribute('canceltext')||'cancel';
     }
 
     get loading() {
-        return this.getAttribute('loading')!==null;
+        return this.getAttribute('loading') !== null;
     }
 
     set title(value) {
@@ -135,9 +135,9 @@ class XyPopcon extends HTMLElement {
     }
 
     set type(value) {
-        if(value===null||value===false){
+        if (value===null || value===false) {
             this.removeAttribute('type');
-        }else{
+        } else {
             this.setAttribute('type', value);
         }
     }
@@ -151,10 +151,10 @@ class XyPopcon extends HTMLElement {
     }
 
     set open(value) {
-        if(value===null||value===false){
+        if (value===null || value===false) {
             this.removeAttribute('open');
             this.parentNode.removeAttribute('open');
-        }else{
+        } else {
             this.setAttribute('open', '');
             this.parentNode.setAttribute('open','');
             this.loading && (this.loading = false);
@@ -162,56 +162,55 @@ class XyPopcon extends HTMLElement {
     }
 
     set loading(value) {
-        if(value===null||value===false){
+        if (value===null || value===false) {
             this.removeAttribute('loading');
-        }else{
+        } else {
             this.setAttribute('loading', '');
         }
     }
 
     connectedCallback() {
         this.remove = false;
-        if(this.type){
+        if (this.type) {
             this.titles = this.shadowRoot.getElementById('title');
             this.btnClose = this.shadowRoot.getElementById('btn-close');
         }
-        if(this.type=='confirm'){
+        if (this.type=='confirm') {
             this.btnCancel = this.shadowRoot.getElementById('btn-cancel');
             this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
         }
         this.addEventListener('transitionend',(ev)=>{
-            if(ev.propertyName === 'transform' && this.open){
-                if(this.type=='confirm'){
+            if (ev.propertyName === 'transform' && this.open) {
+                if (this.type=='confirm') {
                     this.btnSubmit.focus();
                 }
-                if(this.type=='pane'){
+                if (this.type=='pane') {
                     this.btnClose.focus();
                 }
                 this.dispatchEvent(new CustomEvent('open'));
             }
         })
         this.addEventListener('transitionend',(ev)=>{
-            if(ev.propertyName === 'transform' && !this.open){
-                if( this.remove ){
+            if (ev.propertyName === 'transform' && !this.open) {
+                if (this.remove){
                     this.parentNode.removeChild(this);
-                    //document.body.removeChild(this);
                 }
                 this.dispatchEvent(new CustomEvent('close'));
             }
         })
         this.addEventListener('click',(ev)=>{
-            if( ev.target.closest('[autoclose]')){
+            if (ev.target.closest('[autoclose]')) {
                 this.open = false;
                 window.xyActiveElement.focus();
             }
         })
-        if(this.type){
+        if (this.type){
             this.btnClose.addEventListener('click',()=>{
                 this.open = false;
                 window.xyActiveElement.focus();
             })
         }
-        if(this.type=='confirm'){
+        if (this.type=='confirm') {
             this.btnCancel.addEventListener('click',async ()=>{
                 this.dispatchEvent(new CustomEvent('cancel'));
                 this.open = false;
@@ -219,7 +218,7 @@ class XyPopcon extends HTMLElement {
             })
             this.btnSubmit.addEventListener('click',()=>{
                 this.dispatchEvent(new CustomEvent('submit'));
-                if(!this.loading){
+                if (!this.loading) {
                     this.open = false;
                     window.xyActiveElement.focus();
                 }
@@ -228,29 +227,29 @@ class XyPopcon extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'open' && this.shadowRoot){
-            if(newValue==null && !this.stopfocus){
+        if (name == 'open' && this.shadowRoot) {
+            if (newValue==null && !this.stopfocus) {
                 //window.xyActiveElement.focus();
             }
         }
-        if( name == 'loading' && this.shadowRoot){
-            if(newValue!==null){
+        if (name == 'loading' && this.shadowRoot) {
+            if (newValue!==null) {
                 this.btnSubmit.loading = true;
-            }else{
+            } else {
                 this.btnSubmit.loading = false;
             }
         }
-        if( name == 'title' && this.titles){
-            if(newValue!==null){
+        if (name == 'title' && this.titles) {
+            if (newValue!==null) {
                 this.titles.innerHTML = newValue;
             }
         }
-        if( name == 'oktext' && this.btnSubmit){
-            if(newValue!==null){
+        if (name == 'oktext' && this.btnSubmit) {
+            if (newValue!==null) {
                 this.btnSubmit.innerHTML = newValue;
             }
         }
-        if( name == 'canceltext' && this.btnCancel){
+        if (name == 'canceltext' && this.btnCancel) {
             if(newValue!==null){
                 this.btnCancel.innerHTML = newValue;
             }
@@ -258,7 +257,7 @@ class XyPopcon extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-popcon')){
+if (!customElements.get('xy-popcon')) {
     customElements.define('xy-popcon', XyPopcon);
 }
 
@@ -437,7 +436,7 @@ class XyPopover extends HTMLElement {
     }
 
     get title() {
-        return this.getAttribute('title')||'popcon';
+        return this.getAttribute('title') || 'popcon';
     }
 
     get trigger() {
@@ -445,7 +444,7 @@ class XyPopover extends HTMLElement {
     }
 
     get disabled() {
-        return this.getAttribute('disabled')!==null;
+        return this.getAttribute('disabled') !== null;
     }
 
     get type() {
@@ -453,7 +452,7 @@ class XyPopover extends HTMLElement {
     }
 
     get accomplish() {
-        return this.getAttribute('accomplish')!==null;
+        return this.getAttribute('accomplish') !== null;
     }
 
     get content() {
@@ -473,7 +472,7 @@ class XyPopover extends HTMLElement {
     }
 
     get loading() {
-        return this.getAttribute('loading')!==null;
+        return this.getAttribute('loading') !== null;
     }
 
     set dir(value) {
@@ -497,9 +496,9 @@ class XyPopover extends HTMLElement {
     }
 
     set loading(value) {
-        if(value===null||value===false){
+        if (value===null || value===false) {
             this.removeAttribute('loading');
-        }else{
+        } else {
             this.setAttribute('loading', '');
         }
     }
@@ -512,86 +511,86 @@ class XyPopover extends HTMLElement {
         }
     }
 
-    show(ev){
+    show(ev) {
         this.popcon = this.querySelector('xy-popcon');
-        if(!this.disabled){
-            if(!this.popcon){
+        if (!this.disabled) {
+            if (!this.popcon) {
                 this.popcon = new XyPopcon(this.type);
                 this.popcon.type = this.type;
                 this.appendChild(this.popcon);
-                this.popcon.title = this.title||'popover';
-                this.popcon.innerHTML = this.content||'';
-                if(this.type == 'confirm'){
-                    this.popcon.oktext = this.oktext||'确 定';
-                    this.popcon.canceltext = this.canceltext||'取 消';
+                this.popcon.title = this.title || 'popover';
+                this.popcon.innerHTML = this.content || '';
+                if (this.type == 'confirm') {
+                    this.popcon.oktext = this.oktext || 'confirm';
+                    this.popcon.canceltext = this.canceltext || 'cancel';
                     this.popcon.onsubmit = ()=>this.dispatchEvent(new CustomEvent('submit'));
                     this.popcon.oncancel = ()=>this.dispatchEvent(new CustomEvent('cancel'));
                 }
             }
             //this.popcon.remove = true;
             // this.popcon.clientWidth;
-            if(this.trigger==='contextmenu'){
+            if (this.trigger==='contextmenu') {
                 const {x,y} = this.getBoundingClientRect()
                 this.popcon.style.setProperty('--x',ev.clientX-x+'px');
                 this.popcon.style.setProperty('--y',ev.clientY-y+'px');
                 this.popcon.open = true;
-            }else{
+            } else {
                 const path = ev.path || (ev.composedPath && ev.composedPath());
-                if(!path.includes(this.popcon)){
+                if (!path.includes(this.popcon)) {
                     window.xyActiveElement = document.activeElement;
-                    if(this.accomplish){
+                    if (this.accomplish) {
                         this.popcon.open = true;
-                    }else{
+                    } else {
                         this.popcon.open = !this.popcon.open;
                     }
                 }
             }
-        }else{
+        } else {
             (this.popcon||this).dispatchEvent(new CustomEvent('submit'));
         }
         return this.popcon;
     }
     connectedCallback() {
         this.popcon = this.querySelector('xy-popcon');
-        if(!(this.trigger&&this.trigger!=='click')){
+        if (!(this.trigger&&this.trigger !== 'click')) {
             this.addEventListener('click',this.show);
         }
-        if(this.trigger==='contextmenu'){
+        if (this.trigger === 'contextmenu') {
             this.addEventListener('contextmenu',(ev)=>{
                 ev.preventDefault();
                 const path = ev.path || (ev.composedPath && ev.composedPath());
-                if(!path.includes(this.popcon)){
+                if (!path.includes(this.popcon)) {
                     this.show(ev);
                 }
             });
         }
         document.addEventListener('mousedown',(ev)=>{
             const path = ev.path || (ev.composedPath && ev.composedPath());
-            if( this.popcon && !path.includes(this.popcon) && !this.popcon.loading && !path.includes(this.children[0]) || (this.trigger==='contextmenu') && !path.includes(this.popcon) && ev.which == '1'){
+            if (this.popcon && !path.includes(this.popcon) && !this.popcon.loading && !path.includes(this.children[0]) || (this.trigger==='contextmenu') && !path.includes(this.popcon) && ev.which == '1'){
                 this.popcon.open = false;
             }
         })
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if( name == 'loading' && this.popcon){
+        if (name == 'loading' && this.popcon) {
             if(newValue!==null){
                 this.popcon.loading = true;
             }else{
                 this.popcon.loading = false;
             }
         }
-        if( name == 'title' && this.popcon){
+        if (name == 'title' && this.popcon) {
             if(newValue!==null){
                 this.popcon.title = newValue;
             }
         }
-        if( name == 'oktext' && this.popcon){
+        if (name == 'oktext' && this.popcon) {
             if(newValue!==null){
                 this.popcon.oktext = newValue;
             }
         }
-        if( name == 'canceltext' && this.popcon){
+        if (name == 'canceltext' && this.popcon) {
             if(newValue!==null){
                 this.popcon.canceltext = newValue;
             }

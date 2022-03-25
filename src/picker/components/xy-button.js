@@ -254,9 +254,9 @@ export default class XyButton extends HTMLElement {
     }
 
     set loading(value) {
-        if(value===null||value===false){
+        if (value===null||value===false) {
             this.removeAttribute('loading');
-        }else{
+        } else {
             this.setAttribute('loading', '');
         }
     }
@@ -276,7 +276,7 @@ export default class XyButton extends HTMLElement {
             }
         })
         this.addEventListener('click',function(ev){
-            if(this.toggle){
+            if (this.toggle) {
                 this.checked=!this.checked;
             }
         })
@@ -294,37 +294,37 @@ export default class XyButton extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if(name == 'disabled' && this.btn){
-            if(newValue!==null){
+        if (name == 'disabled' && this.btn) {
+            if (newValue !== null) {
                 this.btn.setAttribute('disabled', 'disabled');
-                if(this.href){
+                if (this.href) {
                     this.btn.removeAttribute('href');
                 }
             }else{
                 this.btn.removeAttribute('disabled');
-                if(this.href){
+                if (this.href) {
                     this.btn.href = this.href;
                 }
             }
         }
-        if( name == 'loading' && this.btn){
-            if(newValue!==null){
+        if (name == 'loading' && this.btn) {
+            if (newValue!==null) {
                 this.shadowRoot.prepend(this.load);
                 this.btn.setAttribute('disabled', 'disabled');
-            }else{
+            } else {
                 this.shadowRoot.removeChild(this.load);
                 this.btn.removeAttribute('disabled');
             }
         }
-        if( name == 'icon' && this.ico){
+        if (name == 'icon' && this.ico) {
             this.ico.name = newValue;
         }
-        if( name == 'href' && this.btn){
+        if (name == 'href' && this.btn) {
             if(!this.disabled){
                 this.btn.href = newValue;
             }
         }
-        if( name == 'htmltype' && this.btn){
+        if (name == 'htmltype' && this.btn) {
             this.btn.type = newValue;
         }
     }

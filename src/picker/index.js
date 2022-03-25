@@ -1,6 +1,6 @@
 import './components/xy-popover.js';
 import MARKER from '../picker/components/icon';
-import { handleCSSVariables } from './utils/main';
+import { handleCSSVariables, setDefaultColorCache, getDefaultColorCache } from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
@@ -12,7 +12,7 @@ class ColorPlugin extends HTMLElement {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         this.colorCollections = options.colorCollections || ColorCollections;
         this.onColorPicked = options.onColorPicked;
-        this.defaulColor = options.defaultColor || '#ff1300';
+        this.defaulColor = handleCSSVariables(options.defaultColor || this.colorCollections[0]);
         this.pluginType = options.type;
 
         shadowRoot.innerHTML = `
@@ -83,9 +83,9 @@ class ColorPlugin extends HTMLElement {
             right:5px;
             bottom:5px;
             z-index:-1;
-            background:linear-gradient( 45deg, #ddd 25%,transparent 0,transparent 75%,#ddd 0 ),linear-gradient( 45deg, #ddd 25%,transparent 0,transparent 75%,#ddd 0 );
-            background-position:0 0,5px 5px;
-            background-size:10px 10px;
+            background: linear-gradient(45deg, #ddd 25%,transparent 0,transparent 75%,#ddd 0 ), linear-gradient(45deg, #ddd 25%, transparent 0, transparent 75%, #ddd 0);
+            background-position: 0 0,5px 5px;
+            background-size: 10px 10px;
         }
         .color-sign {
            max-width: 220px;
@@ -146,7 +146,6 @@ class ColorPlugin extends HTMLElement {
                 </xy-popcon>
             </xy-popover>
         </section>`;
-
     }
 
     focus() {
@@ -158,9 +157,9 @@ class ColorPlugin extends HTMLElement {
         this.popcon = this.shadowRoot.getElementById('popcon');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
-        this.colors.addEventListener('click',(ev)=>{
+        this.colors.addEventListener('click',(ev) => {
             const item = ev.target.closest('button');
-            if(item){
+            if (item) {
                 this.nativeclick = true;
                 this.value = item.dataset.color;
                 this.value = handleCSSVariables(this.value);
@@ -183,7 +182,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     get disabled() {
-        return this.getAttribute('disabled')!==null;
+        return this.getAttribute('disabled') !== null;
     }
 
     get dir() {
@@ -207,9 +206,14 @@ class ColorPlugin extends HTMLElement {
     }
 
     set value(value) {
-        this.colorBtn.style.setProperty('--themeColor', value);
         this.$value = value;
-        if(this.nativeclick){
+        this.colorBtn.style.setProperty(
+            '--themeColor',
+            this.nativeclick
+                ? setDefaultColorCache(value, this.pluginType)
+                : getDefaultColorCache(value, this.pluginType)
+        );
+        if (this.nativeclick) {
             this.nativeclick = false;
             this.dispatchEvent(new CustomEvent('change', {
                 detail: {
@@ -217,9 +221,9 @@ class ColorPlugin extends HTMLElement {
                 }
             }));
         } else {
-            if(this.colorPane){
+            if (this.colorPane) {
                 this.colorPane.value = this.value;
-            }else{
+            } else {
                 this.defaultvalue = this.value;
             }
         }
