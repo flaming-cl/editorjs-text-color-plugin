@@ -1,6 +1,6 @@
 {
   "name": "editorjs-text-color-plugin",
-  "version": "V1.12.1",
+  "version": "1.12.1",
   "description": "Text Color Tool for Editor.js",
   "main": "./dist/bundle.js",
   "scripts": {
