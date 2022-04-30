@@ -30,6 +30,18 @@ function isString(stringInput) {
     return typeof stringInput === 'string' || stringInput instanceof String;
 }
 
+export function throttle(fn, delay) {
+    let id;
+    return (...args) => {
+        if (!id) {
+            id = setTimeout(() => {
+                fn(...args);
+                id = null;
+            }, delay)
+        }
+    }
+}
+
 /**
  * Cache the latest text/marker color
  * @param string defaultColor
