@@ -1,6 +1,6 @@
 import './components/xy-popover.js';
 import MARKER from '../picker/components/icon';
-import { handleCSSVariables, setDefaultColorCache, getDefaultColorCache } from './utils/main';
+import { handleCSSVariables, setDefaultColorCache, getDefaultColorCache, throttle } from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 
 class ColorPlugin extends HTMLElement {
@@ -14,6 +14,8 @@ class ColorPlugin extends HTMLElement {
         this.onColorPicked = options.onColorPicked;
         this.defaulColor = handleCSSVariables(options.defaultColor || this.colorCollections[0]);
         this.pluginType = options.type;
+        this.hasCustomPicker = options.hasCustomPicker,
+        this.customColor = options.customColor;
 
         shadowRoot.innerHTML = `
         <style>
@@ -142,7 +144,14 @@ class ColorPlugin extends HTMLElement {
             <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
                 <xy-popcon id="popcon">
-                    <div class="color-sign" id="colors">${this.colorCollections.map(el => '<button style="background-color:' + el + '" data-color=' + el + '></button>').join('')}</div>
+                    <div class="color-sign" id="colors">
+                        ${this.colorCollections.map(el => '<button style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
+                    </div>
+                    ${this.hasCustomPicker && (
+                        `<div class="color-sign">
+                            <button id="custom-picker" />
+                        </div>`
+                    ) || ''}
                 </xy-popcon>
             </xy-popover>
         </section>`;
@@ -166,7 +175,60 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
+        if (this.hasCustomPicker) {
+            this.setupCustomPicker();
+        }
         this.value = this.defaultvalue;
+    }
+
+    disconnectedCallback() {
+        if (this.pickerInput) {
+            document.body.removeChild(this.pickerInput);
+        }
+    }
+
+    setupCustomPicker() {
+        let isCustomPickerPseudoClick = false;
+        this.customPicker = this.shadowRoot.getElementById('custom-picker');
+        const customPicker = this.customPicker;
+        customPicker.style.backgroundColor = this.customColor;
+        this.customPicker.addEventListener('click', (ev) => {
+            if (isCustomPickerPseudoClick) {
+                isCustomPickerPseudoClick = false;
+                return;
+            }
+            if (this.pickerInput) {
+                document.body.removeChild(this.pickerInput);
+            }
+            this.pickerInput = document.createElement('input');
+            const pickerInput = this.pickerInput;
+            const rect = customPicker.getBoundingClientRect();
+            pickerInput.setAttribute('type', 'color');
+            pickerInput.value = this.customColor;
+            pickerInput.style.position = 'fixed';
+            pickerInput.style.left = `${rect.x}px`;
+            pickerInput.style.top = `${rect.y}px`;
+            pickerInput.style.pointerEvents = 'none';
+            pickerInput.style.zIndex = '1000';
+            pickerInput.style.opacity = '0';
+            pickerInput.addEventListener('input', throttle(ev => {
+                this.nativeclick = true;
+                this.value = ev.target.value;
+                this.value = handleCSSVariables(this.value);
+                this.onColorPicked(this.value);
+
+                customPicker.style.backgroundColor = this.value;
+                this.customColor = this.value;
+
+                isCustomPickerPseudoClick = true;
+                customPicker.click();
+            }, 30))
+            document.body.appendChild(pickerInput);
+            setTimeout(() => {
+                pickerInput.focus();
+                pickerInput.click();
+            }, 0);
+        });
     }
 
     get defaultvalue() {

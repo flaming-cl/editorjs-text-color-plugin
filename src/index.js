@@ -17,6 +17,7 @@ class Color {
     this.api = api;
     this.config = config;
     this.pluginType = this.config.type || 'text';
+    this.hasCustomPicker = this.config.customPicker || false;
     this.color = handleCSSVariables(
         getDefaultColorCache(this.config.defaultColor, this.pluginType)
     );
@@ -60,6 +61,8 @@ class Color {
 
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) { _this.color = value; },
+      hasCustomPicker: this.hasCustomPicker,
+      customColor: this.color,
       defaultColor: this.config.defaultColor,
       colorCollections: this.config.colorCollections,
       type: this.pluginType

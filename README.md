@@ -66,6 +66,7 @@ var editor = EditorJS({
 | colorCollections  | `array` | Colors available in the palette.   CSS variables, for example var(--main-text-color), are supported                                    |
 | defaultColor  | `string` | Default color (if you do not set up a default color, it will be the first color of your color collections).   CSS variables supported. |
 | type  | `string` | Set the plugin as a marker or a text color tool                                                                                        |
+| customPicker  | `boolean` | Whether to show a custom color picker in the palette, defaults to `false`.                                                                                        |
 
 ## Output data
 
