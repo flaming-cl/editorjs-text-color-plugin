@@ -1,8 +1,14 @@
 import './components/xy-popover.js';
 import MARKER from '../picker/components/icon';
-import { handleCSSVariables, setDefaultColorCache, getDefaultColorCache, throttle } from './utils/main';
+import {
+    handleCSSVariables,
+    setDefaultColorCache,
+    getDefaultColorCache,
+    throttle,
+    getCustomColorCache,
+    setCustomColorCache
+} from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
-
 class ColorPlugin extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','dir'] }
@@ -14,8 +20,8 @@ class ColorPlugin extends HTMLElement {
         this.onColorPicked = options.onColorPicked;
         this.defaulColor = handleCSSVariables(options.defaultColor || this.colorCollections[0]);
         this.pluginType = options.type;
-        this.hasCustomPicker = options.hasCustomPicker,
-        this.customColor = options.customColor;
+        this.hasCustomPicker = options.hasCustomPicker;
+        this.customColor = getCustomColorCache(this.pluginType);
 
         shadowRoot.innerHTML = `
         <style>
@@ -28,13 +34,17 @@ class ColorPlugin extends HTMLElement {
         :host([block]){
             display:block;
         }
-
         :host([disabled]){
             pointer-events:none;
         }
         
         :host(:focus-within) xy-popover,:host(:hover) xy-popover{ 
             z-index: 2;
+        }
+        input[type="color"]{
+            -webkit-appearance: none;
+            outline: none;
+            border: none;
         }
         xy-popover{
             width:100%;
@@ -67,6 +77,15 @@ class ColorPlugin extends HTMLElement {
         xy-popcon{
             position: fixed;
             min-width:100%;
+        }
+        #custom-picker {
+            position: relative;
+            top: -1px;
+            background-color: rgb(250, 250, 250);
+            border-color: rgb(255 118 21) rgb(245 80 80 / 74%) #89c1c9 #95d5b6;
+            border-width: 3px;
+            border-radius: 8px;
+            height: 18px;
         }
         .pop-footer{
             display:flex;
@@ -145,13 +164,9 @@ class ColorPlugin extends HTMLElement {
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
                 <xy-popcon id="popcon">
                     <div class="color-sign" id="colors">
+                        ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
                         ${this.colorCollections.map(el => '<button style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
-                    ${this.hasCustomPicker && (
-                        `<div class="color-sign">
-                            <button id="custom-picker" />
-                        </div>`
-                    ) || ''}
                 </xy-popcon>
             </xy-popover>
         </section>`;
@@ -168,10 +183,9 @@ class ColorPlugin extends HTMLElement {
         this.colors = this.shadowRoot.getElementById('colors');
         this.colors.addEventListener('click',(ev) => {
             const item = ev.target.closest('button');
-            if (item) {
+            if (item && item.id !== 'custom-picker') {
                 this.nativeclick = true;
-                this.value = item.dataset.color;
-                this.value = handleCSSVariables(this.value);
+                this.value = handleCSSVariables(item.dataset.color);
                 this.onColorPicked(this.value);
             }
         });
@@ -202,23 +216,22 @@ class ColorPlugin extends HTMLElement {
             }
             this.pickerInput = document.createElement('input');
             const pickerInput = this.pickerInput;
-            const rect = customPicker.getBoundingClientRect();
+            const rect = this.popcon.getBoundingClientRect();
             pickerInput.setAttribute('type', 'color');
             pickerInput.value = this.customColor;
             pickerInput.style.position = 'fixed';
-            pickerInput.style.left = `${rect.x}px`;
-            pickerInput.style.top = `${rect.y}px`;
+            pickerInput.style.left = `${rect.x + 3}px`;
+            pickerInput.style.top = `${rect.y + 10}px`;
             pickerInput.style.pointerEvents = 'none';
-            pickerInput.style.zIndex = '1000';
+            pickerInput.style.zIndex = '999';
             pickerInput.style.opacity = '0';
             pickerInput.addEventListener('input', throttle(ev => {
                 this.nativeclick = true;
-                this.value = ev.target.value;
-                this.value = handleCSSVariables(this.value);
+                this.value = handleCSSVariables(ev.target.value);
                 this.onColorPicked(this.value);
+                setCustomColorCache(this.value, this.pluginType);
 
                 customPicker.style.backgroundColor = this.value;
-                this.customColor = this.value;
 
                 isCustomPickerPseudoClick = true;
                 customPicker.click();
@@ -268,6 +281,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     set value(value) {
+        if (!value) return;
         this.$value = value;
         this.colorBtn.style.setProperty(
             '--themeColor',

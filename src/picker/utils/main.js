@@ -61,3 +61,21 @@ export function getDefaultColorCache(defaultColor, pluginType) {
     const cachedDefaultColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}`);
     return cachedDefaultColor ? JSON.parse(cachedDefaultColor) : defaultColor;
 }
+
+/**
+ * Cache custom color
+ * @param string customColor, string pluginType
+ */
+export function setCustomColorCache(customColor, pluginType) {
+    sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`, JSON.stringify(customColor));
+}
+
+/**
+ * Get cached custom color
+ * @param string customColor, string pluginType
+ * @returns string cachedCustomColor
+ */
+export function getCustomColorCache(pluginType) {
+    const cachedCustomColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`);
+    return cachedCustomColor ? JSON.parse(cachedCustomColor) : null;
+}

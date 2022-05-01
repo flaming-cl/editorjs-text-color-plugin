@@ -34,7 +34,8 @@ class Color {
      */
     this.iconClasses = {
       base: this.api.styles.inlineToolButton,
-      active: this.api.styles.inlineToolButtonActive
+      active: this.api.styles.inlineToolButtonActive,
+
     };
   }
 
@@ -58,11 +59,9 @@ class Color {
     this.button.type = 'button';
     this.button.classList.add('colorPlugin');
     this.button.classList.add(this.iconClasses.base);
-
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) { _this.color = value; },
       hasCustomPicker: this.hasCustomPicker,
-      customColor: this.color,
       defaultColor: this.config.defaultColor,
       colorCollections: this.config.colorCollections,
       type: this.pluginType
