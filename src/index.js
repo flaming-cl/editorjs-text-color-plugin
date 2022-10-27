@@ -3,6 +3,7 @@
  */
 const Picker = require('./picker');
 const { getDefaultColorCache, handleCSSVariables } = require('./picker/utils/main');
+const LocalStorageService = require("./localStorageService");
 require('./index.css').toString();
 
 /**
@@ -34,13 +35,9 @@ class Color {
     this.iconClasses = {
       base: this.api.styles.inlineToolButton,
       active: this.api.styles.inlineToolButtonActive,
-
     };
   }
 
-  static get localStorageFontKey() {
-    return 'editorFontColor';
-  }
   /**
    * Specifies Tool as Inline Toolbar Tool
    *
@@ -64,11 +61,10 @@ class Color {
     const colorPicker = new Picker.ColorPlugin({
       onColorPicked: function (value) {
         _this.color = value;
-        _this.setColorInLocalStorage(value)
         },
       hasCustomPicker: this.hasCustomPicker,
       defaultColor: this.config.defaultColor,
-      colorCollections: this.config.colorCollections.concat(_this.getColorsFromLocalStorage()),
+      colorCollections: this.config.colorCollections.concat(LocalStorageService.getColorsFromLocalStorage()),
       type: this.pluginType
     });
 
@@ -96,39 +92,7 @@ class Color {
   checkState() {
   }
 
-  /**
-   *
-   * @returns {*[]|any}
-   * Get list of colors stored in local storage
-   */
-  getColorsFromLocalStorage() {
-    const colorsAsString = localStorage.getItem(Color.localStorageFontKey);
-    try {
-      if (colorsAsString) {
-        return JSON.parse(colorsAsString);
-      }
-      return [];
-    } catch (e) {
-      return [];
-    }
-  }
 
-  /**
-   *
-   * @param color {string}
-   * Save the color to local storage array of saved colours.
-   * We only store up to 10 entries at a time
-   */
-  setColorInLocalStorage(color) {
-    const currentLocalStorageColors = this.getColorsFromLocalStorage();
-    if (currentLocalStorageColors.length === 10) {
-      currentLocalStorageColors.pop();
-    }
-    if (!currentLocalStorageColors.includes(color)) {
-      currentLocalStorageColors.unshift(color);
-    }
-    localStorage.setItem(Color.localStorageFontKey, JSON.stringify(currentLocalStorageColors));
-  }
 
   /**
    * Sanitizer rule
