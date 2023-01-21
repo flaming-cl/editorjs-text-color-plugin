@@ -252,7 +252,8 @@ class Color {
   static get sanitize() {
     return {
       font: true,
-      span: true
+      span: true,
+      mark: true
     };
   }
 }
