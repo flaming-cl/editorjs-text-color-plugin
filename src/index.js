@@ -2,6 +2,7 @@
  * Build styles
  */
 const Picker = require('./picker');
+const { markerIcon, textIcon } = require('./icons');
 const { getDefaultColorCache, handleCSSVariables } = require('./picker/utils/main');
 require('./index.css').toString();
 
@@ -20,6 +21,7 @@ class Color {
     this.pluginType = this.config.type || 'text';
     this.parentTag = this.pluginType === 'marker' ? 'MARK' : 'FONT';
     this.hasCustomPicker = this.config.customPicker || false;
+    this.icon = this.config.icon;
     this.color = handleCSSVariables(
         getDefaultColorCache(this.config.defaultColor, this.pluginType)
     );
@@ -72,7 +74,7 @@ class Color {
    */
   createLeftButton() {
     const leftPart = document.createElement('div');
-    leftPart.id = 'color-btn';
+    leftPart.id = 'color-left-btn';
     leftPart.appendChild(this.createButtonIcon());
     leftPart.addEventListener('click', () => this.clickedOnLeft = true);
     return leftPart;
@@ -86,7 +88,8 @@ class Color {
   createButtonIcon() {
     const buttonIcon = document.createElement('div');
     buttonIcon.id = 'color-btn-text';
-    buttonIcon.innerText = this.pluginType === 'marker' ? '✎' : 'A';
+    const defaultIcon = this.pluginType === 'marker' ? markerIcon : textIcon;
+    buttonIcon.innerHTML = this.icon || defaultIcon;
     return buttonIcon;
   }
 

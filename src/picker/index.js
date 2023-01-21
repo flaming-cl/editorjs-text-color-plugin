@@ -46,9 +46,9 @@ class ColorPlugin extends HTMLElement {
             border: none;
         }
         xy-popover{
-            width:100%;
+            width: 12px;
             height:35px;
-            margin-right: 3px;
+            padding-right: 1px;
         }
         xy-popover:hover {
             border-radius: 0 5px 5px 0;
@@ -56,9 +56,9 @@ class ColorPlugin extends HTMLElement {
         }
         .color-btn {
             border: 1px solid #cab9b9;
-            margin: 18px 2px 2px 2px;
-            width: 6px;
-            height: 6px;
+            margin: 18px 3px 2px 3px;
+            width: 7px;
+            height: 7px;
             opacity: 0.9;
             padding: 1px 0 1px 0;
             color: var(--themeColor, #42b983);
