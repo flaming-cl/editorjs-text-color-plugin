@@ -141,7 +141,6 @@ class Color {
    * Wrap selected fragment
    *
    * @param {Range} range - selected fragment
-   * @param {Range} termWrapper - parent of selected fragment
    */
   wrap(range) {
     const selectedText = range.extractContents();
