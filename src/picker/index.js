@@ -1,5 +1,4 @@
 import './components/xy-popover.js';
-import MARKER from '../picker/components/icon';
 import {
     handleCSSVariables,
     setDefaultColorCache,
@@ -141,31 +140,23 @@ class ColorPlugin extends HTMLElement {
             padding-top: 8px;
             padding-right: 1px;
             margin-left: 3px;
-            text-shadow: 2px 0 0 #cab9b9;
             padding-left: 3px;
             border-radius: 5px 0 0 5px;
         }
         .color-fire-btn:hover {
             font-size: 17px;
             font-weight: bold;
-            text-shadow: 2px 0 0 #cab9b9;
             background: rgba(203, 203, 203, 0.49);
             border-radius: 5px 0 0 5px;
         }
-        .color-fire-btn-text {
-            margin-right: 2px;
-        }
         </style>
         <section class="color-section">
-            <div class="color-fire-btn" id="color-fire-btn">
-                ${this.pluginType === 'marker' ? MARKER : '<div class="color-fire-btn-text">A</div>' }
-            </div>
             <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
                 <xy-popcon id="popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
-                        ${this.colorCollections.map(el => '<button style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
+                        ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
                 </xy-popcon>
             </xy-popover>

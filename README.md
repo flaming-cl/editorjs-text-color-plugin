@@ -1,4 +1,4 @@
-![](https://badgen.net/badge/Editor.js/v2.23.2/blue)
+![](https://badgen.net/badge/Editor.js/v2.26.4/blue)
 
 # Text Color Tool
 
@@ -82,14 +82,14 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 ```
 
 ## Recent Updates
-| Field   | Type        | Description                                                                                                                                                          |
-|---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0) |
-| V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                  |
+| Field   | Type        | Description                                                                                                                                                                                                         |
+|---------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0)                                                |
+| V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                                                                 |
+| V1.2.0  | Jan-20-2023 | Add new feature: clean selected text/marker color. Note: this version is compatible with the latest Editor.js V2.26.4. If you found your marker text is not exported, you need to update Editor.js to support that. |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
-Marker Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 ## License
 [MIT](https://github.com/flaming-cl/editorjs-text-color-plugin/blob/master/LICENSE)

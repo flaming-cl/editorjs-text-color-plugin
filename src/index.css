@@ -18,3 +18,22 @@
   width: 30px;
   border-radius: 3px;
 }
+
+#color-btn {
+  height: 35px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}
+
+#color-btn-text {
+  height: 15px;
+}
+
+#color-btn:hover {
+  border-radius: 5px 0 0 5px;
+  background: rgba(203, 203, 203, 0.49);
+}
+
