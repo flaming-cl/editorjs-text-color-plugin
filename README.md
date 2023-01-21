@@ -84,11 +84,11 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 ```
 
 ## Recent Updates
-| Field   | Type        | Description                                                                                                                                                                          |
-|---------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0)                 |
-| V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                                  |
-| V2.0.0  | Jan-20-2023 | Add new feature: 1. clean selected text/marker color. When the left area of the plugin color turns blue, it means selected color can be cleaned now. 2. allow customized button icon |
+| Field   | Type        | Description                                                                                                                                                                   |
+|---------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0)          |
+| V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                           |
+| V2.0.0  | Jan-20-2023 | Add new features: 1. clean applied text/marker color. When the left area of the plugin color turns blue, it means applied color can be cleaned now. 2. Allow customized icons |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
