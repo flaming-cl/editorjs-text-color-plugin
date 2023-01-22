@@ -151,11 +151,13 @@ class Color {
 
     newWrapper.appendChild(selectedText);
     range.insertNode(newWrapper);
+
     if (this.pluginType === 'marker') {
       this.wrapMarker(newWrapper);
     } else {
       this.wrapTextColor(newWrapper);
     }
+
     this.api.selection.expandToTag(newWrapper);
   }
 
@@ -216,6 +218,11 @@ class Color {
     sel.addRange(range)
   }
 
+  /**
+   * update color without create a new tag
+   *
+   * @param {Range} termWrapper - parent of selected fragment
+   */
   updateWrapper(termWrapper) {
     if (this.pluginType === 'marker') {
       termWrapper.style.backgroundColor = this.color;
@@ -224,6 +231,11 @@ class Color {
     }
   }
 
+  /**
+   * remove wrapper
+   *
+   * @param {Range} termWrapper - parent of selected fragment
+   */
   removeWrapper(termWrapper) {
     termWrapper.parentNode.removeChild(termWrapper);
   }
