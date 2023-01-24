@@ -21,10 +21,11 @@ class Color {
     this.pluginType = this.config.type || 'text';
     this.parentTag = this.pluginType === 'marker' ? 'MARK' : 'FONT';
     this.hasCustomPicker = this.config.customPicker || false;
-    this.icon = this.config.icon;
     this.color = handleCSSVariables(
         getDefaultColorCache(this.config.defaultColor, this.pluginType)
     );
+    this.picker = null;
+    this.icon = null;
 
     /**
      * Toolbar Button
@@ -73,11 +74,14 @@ class Color {
    * @return {HTMLElement}
    */
   createLeftButton() {
-    const leftPart = document.createElement('div');
-    leftPart.id = 'color-left-btn';
-    leftPart.appendChild(this.createButtonIcon());
-    leftPart.addEventListener('click', () => this.clickedOnLeft = true);
-    return leftPart;
+    if (!this.icon) {
+      this.icon = document.createElement('div');
+      this.icon.id = 'color-left-btn';
+      this.icon.appendChild(this.createButtonIcon());
+      this.icon.addEventListener('click', () => this.clickedOnLeft = true);
+    }
+
+    return this.icon;
   }
 
   /**
@@ -89,7 +93,7 @@ class Color {
     const buttonIcon = document.createElement('div');
     buttonIcon.id = 'color-btn-text';
     const defaultIcon = this.pluginType === 'marker' ? markerIcon : textIcon;
-    buttonIcon.innerHTML = this.icon || defaultIcon;
+    buttonIcon.innerHTML = this.config.icon || defaultIcon;
     return buttonIcon;
   }
 
@@ -99,15 +103,19 @@ class Color {
    * @return {HTMLElement}
    */
   createRightButton(sharedScope) {
-    return new Picker.ColorPlugin({
-      onColorPicked: function (value) {
-        sharedScope.color = value;
-      },
-      hasCustomPicker: this.hasCustomPicker,
-      defaultColor: this.config.defaultColor,
-      colorCollections: this.config.colorCollections,
-      type: this.pluginType
-    });
+    if (!this.picker) {
+      this.picker = new Picker.ColorPlugin({
+        onColorPicked: function (value) {
+          sharedScope.color = value;
+        },
+        hasCustomPicker: this.hasCustomPicker,
+        defaultColor: this.config.defaultColor,
+        colorCollections: this.config.colorCollections,
+        type: this.pluginType
+      });
+    }
+
+    return this.picker;
   }
 
   /**
@@ -269,6 +277,11 @@ class Color {
       span: true,
       mark: true
     };
+  }
+
+  clear() {
+    this.picker = null;
+    this.icon = null;
   }
 }
 

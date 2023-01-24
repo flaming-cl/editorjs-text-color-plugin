@@ -5,7 +5,9 @@ import {
     getDefaultColorCache,
     throttle,
     getCustomColorCache,
-    setCustomColorCache
+    setCustomColorCache,
+    CONVERTER_BTN,
+    CONVERTER_PANEL,
 } from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 class ColorPlugin extends HTMLElement {
@@ -180,10 +182,19 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
+        this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
         this.value = this.defaultvalue;
+    }
+
+    closeConverter() {
+        const conversionOpened = document.getElementsByClassName(CONVERTER_PANEL)[0];
+        if (conversionOpened) {
+            const converterBtn = document.getElementsByClassName(CONVERTER_BTN)[0];
+            converterBtn?.click();
+        }
     }
 
     disconnectedCallback() {

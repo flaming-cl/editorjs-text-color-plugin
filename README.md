@@ -24,7 +24,7 @@ const ColorPlugin = require('editorjs-text-color-plugin');
 
 ### Load from CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@2.0.1/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@2.0.2/dist/bundle.js"></script>
 ```
 
 ## Usage
@@ -44,6 +44,7 @@ var editor = EditorJS({
          colorCollections: ['#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39', '#FFF'],
          defaultColor: '#FF1300',
          type: 'text', 
+         customPicker: true // add a button to allow selecting any colour  
       }     
     },
     Marker: {
@@ -66,9 +67,9 @@ var editor = EditorJS({
 |------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------|
 | colorCollections | `array`   | Colors available in the palette.   CSS variables, for example var(--main-text-color), are supported                                    |
 | defaultColor     | `string`  | Default color (if you do not set up a default color, it will be the first color of your color collections).   CSS variables supported. |
-| type             | `string`  | Set the plugin as a marker or a text color tool                                                                                        |
-| customPicker     | `boolean` | Whether to show a random color picker in the palette, defaults to `false`.                                                             |
-| icon             | `string`  | SVG string to replace default button icons.                                                                                     |
+| type             | `string`  | Set the plugin as a marker or a text color tool. It will be set as a text color tool as default.                                       |
+| customPicker     | `boolean` | Turn on a random color picker in the palette, defaults to `false`.                                                                     |
+| icon             | `string`  | SVG string to replace default button icons.                                                                                            |
 
 ## Output data
 
@@ -89,6 +90,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 | V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0)      |
 | V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                       |
 | V2.0.1  | Jan-20-2023 | New features: 1. clean applied text/marker color. When the left area of the plugin color turns blue, it means applied color can be cleaned now. 2. Allow customized icons |
+| V2.0.2  | Jan-23-2023 | Fix: 1. toggle conversion tool when opening inline color plugin 2. optimized picker initialization                                                                         |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
