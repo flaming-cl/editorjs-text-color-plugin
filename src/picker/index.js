@@ -170,7 +170,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
+        this.$popover = this.shadowRoot.getElementById('popover');
         this.popcon = this.shadowRoot.getElementById('popcon');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
@@ -182,7 +182,7 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-        this.popover.addEventListener('click', () => this.closeConverter());
+        this.$popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
@@ -315,9 +315,9 @@ class ColorPlugin extends HTMLElement {
                 this.colorBtn.removeAttribute('disabled');
             }
         }
-        if (name == 'dir' && this.popover) {
+        if (name == 'dir' && this.$popover) {
             if (newValue != null) {
-                this.popover.dir = newValue;
+                this.$popover.dir = newValue;
             }
         }
     }
