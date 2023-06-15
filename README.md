@@ -24,7 +24,7 @@ const ColorPlugin = require('editorjs-text-color-plugin');
 
 ### Load from CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@2.0.3/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@2.0.4/dist/bundle.js"></script>
 ```
 
 ## Usage
@@ -91,7 +91,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 | V1.13.1 | May-1-2022   | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                       |
 | V2.0.1  | Jan-20-2023  | New features: 1. clean applied text/marker color. When the left area of the plugin color turns blue, it means applied color can be cleaned now. 2. Allow customized icons |
 | V2.0.2  | Jan-23-2023  | Fix: 1. toggle conversion tool when opening inline color plugin 2. optimized picker initialization                                                                        |
-| V2.0.3  | June-14-2023 | Fix: Chrome 114 popover conflicts. Credit to iwnow / dev1forma                                                                                                            |
+| V2.0.4  | June-14-2023 | Fix: Chrome 114 popover conflicts. Credit to iwnow / dev1forma                                                                                                            |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
