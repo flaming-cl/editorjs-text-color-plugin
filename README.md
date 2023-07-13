@@ -19,7 +19,7 @@ npm i --save-dev editorjs-text-color-plugin
 Import the plugin
 
 ```javascript
-const ColorPlugin = require('editorjs-text-color-plugin');
+import ColorPlugin from 'editorjs-text-color-plugin';
 ```
 
 ### Load from CDN

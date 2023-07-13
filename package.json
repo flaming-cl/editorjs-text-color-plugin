@@ -3,6 +3,7 @@
   "version": "1.13.2",
   "description": "Text Color Tool for Editor.js",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch"

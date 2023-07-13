@@ -1,14 +1,14 @@
 /**
  * Build styles
  */
-const Picker = require('./picker');
-const { getDefaultColorCache, handleCSSVariables } = require('./picker/utils/main');
-require('./index.css').toString();
+import * as Picker from './picker';
+import { getDefaultColorCache, handleCSSVariables } from './picker/utils/main';
+import './index.css';
 
 /**
  * Text Color Tool for Editor.js
  */
-class Color {
+export default class Color {
 
   /**
    * @param {{api: object}}  - Editor.js API
@@ -102,5 +102,3 @@ class Color {
     };
   }
 }
-
-module.exports = Color;
