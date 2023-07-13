@@ -86,6 +86,7 @@ Colored text will be wrapped with a `color` tag with an `color-plugin` class.
 |---------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | V1.12.1 | Mar-25-2022 | CSS variable Support for colorCollection/defaultColor.   This version supports the newest version of Editor.js (v2.23.2). Previous versions support Editor.js (v2.0) |
 | V1.13.1 | May-1-2022  | Thanks to HaoCherHong's contribution, we add a custom color picker in this version.                                                                                  |
+| V1.13.2 | Jul-13-2023 | Backport Chrome popover fix                                                                                                                                          |
 
 ## Credits
 UI Built Based on https://github.com/XboxYan/xy-ui by XboxYan  
