@@ -1,12 +1,13 @@
 import './components/xy-popover.js';
-import MARKER from '../picker/components/icon';
 import {
     handleCSSVariables,
     setDefaultColorCache,
     getDefaultColorCache,
     throttle,
     getCustomColorCache,
-    setCustomColorCache
+    setCustomColorCache,
+    CONVERTER_BTN,
+    CONVERTER_PANEL,
 } from './utils/main';
 import LocalStorageService from "../localStorageService";
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
@@ -48,9 +49,9 @@ class ColorPlugin extends HTMLElement {
             border: none;
         }
         xy-popover{
-            width:100%;
+            width: 12px;
             height:35px;
-            margin-right: 3px;
+            padding-right: 1px;
         }
         xy-popover:hover {
             border-radius: 0 5px 5px 0;
@@ -58,9 +59,9 @@ class ColorPlugin extends HTMLElement {
         }
         .color-btn {
             border: 1px solid #cab9b9;
-            margin: 18px 2px 2px 2px;
-            width: 6px;
-            height: 6px;
+            margin: 18px 3px 2px 3px;
+            width: 7px;
+            height: 7px;
             opacity: 0.9;
             padding: 1px 0 1px 0;
             color: var(--themeColor, #42b983);
@@ -142,31 +143,23 @@ class ColorPlugin extends HTMLElement {
             padding-top: 8px;
             padding-right: 1px;
             margin-left: 3px;
-            text-shadow: 2px 0 0 #cab9b9;
             padding-left: 3px;
             border-radius: 5px 0 0 5px;
         }
         .color-fire-btn:hover {
             font-size: 17px;
             font-weight: bold;
-            text-shadow: 2px 0 0 #cab9b9;
             background: rgba(203, 203, 203, 0.49);
             border-radius: 5px 0 0 5px;
         }
-        .color-fire-btn-text {
-            margin-right: 2px;
-        }
         </style>
         <section class="color-section">
-            <div class="color-fire-btn" id="color-fire-btn">
-                ${this.pluginType === 'marker' ? MARKER : '<div class="color-fire-btn-text">A</div>' }
-            </div>
             <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
                 <xy-popcon id="popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
-                        ${this.colorCollections.map(el => '<button style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
+                        ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
                 </xy-popcon>
             </xy-popover>
@@ -178,7 +171,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
+        this.$popover = this.shadowRoot.getElementById('popover');
         this.popcon = this.shadowRoot.getElementById('popcon');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
@@ -190,10 +183,19 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
+        this.$popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
         this.value = this.defaultvalue;
+    }
+
+    closeConverter() {
+        const conversionOpened = document.getElementsByClassName(CONVERTER_PANEL)[0];
+        if (conversionOpened) {
+            const converterBtn = document.getElementsByClassName(CONVERTER_BTN)[0];
+            converterBtn?.click();
+        }
     }
 
     disconnectedCallback() {
@@ -315,9 +317,9 @@ class ColorPlugin extends HTMLElement {
                 this.colorBtn.removeAttribute('disabled');
             }
         }
-        if (name == 'dir' && this.popover) {
+        if (name == 'dir' && this.$popover) {
             if (newValue != null) {
-                this.popover.dir = newValue;
+                this.$popover.dir = newValue;
             }
         }
     }

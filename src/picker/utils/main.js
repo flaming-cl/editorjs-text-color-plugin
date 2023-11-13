@@ -44,8 +44,9 @@ export function throttle(fn, delay) {
 
 /**
  * Cache the latest text/marker color
- * @param string defaultColor
- * @returns string defaultColor
+ * @param defaultColor
+ * @param pluginType
+ * @returns defaultColor
  */
 export function setDefaultColorCache(defaultColor, pluginType) {
     sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}`, JSON.stringify(defaultColor));
@@ -54,7 +55,8 @@ export function setDefaultColorCache(defaultColor, pluginType) {
 
 /**
  * Get cached text/marker color
- * @param string defaultColor
+ * @param defaultColor
+ * @param pluginType
  * @returns string cachedDefaultColor/defaultColor
  */
 export function getDefaultColorCache(defaultColor, pluginType) {
@@ -64,7 +66,8 @@ export function getDefaultColorCache(defaultColor, pluginType) {
 
 /**
  * Cache custom color
- * @param string customColor, string pluginType
+ * @param customColor,
+ * @param pluginType
  */
 export function setCustomColorCache(customColor, pluginType) {
     sessionStorage.setItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`, JSON.stringify(customColor));
@@ -72,10 +75,13 @@ export function setCustomColorCache(customColor, pluginType) {
 
 /**
  * Get cached custom color
- * @param string customColor, string pluginType
+ * @param pluginType
  * @returns string cachedCustomColor
  */
 export function getCustomColorCache(pluginType) {
     const cachedCustomColor = sessionStorage.getItem(`${TEXT_COLOR_CACHE}-${pluginType}-custom`);
     return cachedCustomColor ? JSON.parse(cachedCustomColor) : null;
 }
+
+export const CONVERTER_BTN = 'ce-inline-toolbar__dropdown';
+export const CONVERTER_PANEL = 'ce-conversion-toolbar--showed';

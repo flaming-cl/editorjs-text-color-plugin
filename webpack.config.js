@@ -1,19 +1,17 @@
 module.exports = {
-  entry: './src/index.js',
+  output: {
+    path: __dirname + '/dist',
+    publicPath: '/',
+    filename: 'bundle.js',
+    library: 'ColorPlugin',
+    libraryTarget: 'umd'
+  },
+  mode: 'production',
+  resolve: {
+    extensions: ['.js'],
+  },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            query: {
-              presets: [ '@babel/preset-env' ],
-            },
-          },
-        ]
-      },
       {
         test: /\.css$/,
         use: [
@@ -29,13 +27,9 @@ module.exports = {
           }
         ]
       }
-    ]
+    ],
   },
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js',
-    library: 'ColorPlugin',
-    libraryTarget: 'umd'
-  }
-};
+  optimization: {
+    minimize: true,
+  },
+}
