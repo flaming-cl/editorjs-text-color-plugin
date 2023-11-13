@@ -1,41 +1,36 @@
-class LocalStorageService {
-    /**
-     *
-     * @returns {*[]|any}
-     * Get list of colors stored in local storage
-     */
-    static getColorsFromLocalStorage() {
-        const colorsAsString = localStorage.getItem(LocalStorageService.localStorageFontKey);
-        try {
-            if (colorsAsString) {
-                return JSON.parse(colorsAsString);
-            }
-            return [];
-        } catch (e) {
-            return [];
-        }
-    }
+const localStorageFontKey = 'editorFontColor';
 
-    /**
-     *
-     * @param color {string}
-     * Save the color to local storage array of saved colours.
-     * We only store up to 10 entries at a time
-     */
-    static setColorInLocalStorage(color) {
-        const currentLocalStorageColors = LocalStorageService.getColorsFromLocalStorage();
-        if (currentLocalStorageColors.length === 10) {
-            currentLocalStorageColors.pop();
+/**
+ *
+ * @returns {string[]}
+ * Get list of colors stored in local storage
+ */
+export const getColorsFromLocalStorage = () => {
+    const colorsAsString = localStorage.getItem(localStorageFontKey);
+    try {
+        if (colorsAsString) {
+            return JSON.parse(colorsAsString);
         }
-        if (!currentLocalStorageColors.includes(color)) {
-            currentLocalStorageColors.unshift(color);
-        }
-        localStorage.setItem(LocalStorageService.localStorageFontKey, JSON.stringify(currentLocalStorageColors));
-    }
-
-    static get localStorageFontKey() {
-        return 'editorFontColor';
+        return [];
+    } catch (e) {
+        return [];
     }
 }
 
-export default LocalStorageService;
+/**
+ *
+ * @param color {string}
+ * @param maxCacheSize {number}
+ * Save the color to local storage array of saved colours.
+ * We only store up to 10 entries at a time
+ */
+export const setColorInLocalStorage = (color, maxCacheSize) => {
+    const currentLocalStorageColors = getColorsFromLocalStorage();
+    if (currentLocalStorageColors.length === maxCacheSize) {
+        currentLocalStorageColors.pop();
+    }
+    if (!currentLocalStorageColors.includes(color)) {
+        currentLocalStorageColors.unshift(color);
+    }
+    localStorage.setItem(localStorageFontKey, JSON.stringify(currentLocalStorageColors));
+}

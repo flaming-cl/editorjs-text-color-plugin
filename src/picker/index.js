@@ -9,7 +9,7 @@ import {
     CONVERTER_BTN,
     CONVERTER_PANEL,
 } from './utils/main';
-import LocalStorageService from "../localStorageService";
+import {setColorInLocalStorage} from "../localStorageService";
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 class ColorPlugin extends HTMLElement {
 
@@ -24,7 +24,8 @@ class ColorPlugin extends HTMLElement {
         this.pluginType = options.type;
         this.hasCustomPicker = options.hasCustomPicker;
         this.customColor = getCustomColorCache(this.pluginType);
-
+        this.allowUserCachedColors = options.allowUserCachedColors
+        this.numberOfUserCachedColors = options.numberOfUserCachedColors
         shadowRoot.innerHTML = `
         <style>
         :host{
@@ -232,7 +233,6 @@ class ColorPlugin extends HTMLElement {
                 this.nativeclick = true;
                 this.value = handleCSSVariables(ev.target.value);
                 this.onColorPicked(this.value);
-                LocalStorageService.setColorInLocalStorage(this.value)
                 setCustomColorCache(this.value, this.pluginType);
 
                 customPicker.style.backgroundColor = this.value;
@@ -240,6 +240,9 @@ class ColorPlugin extends HTMLElement {
                 isCustomPickerPseudoClick = true;
                 customPicker.click();
             }, 30))
+            pickerInput.addEventListener('change', (ev) => {
+                setColorInLocalStorage(ev.target.value, this.numberOfUserCachedColors)
+            })
             document.body.appendChild(pickerInput);
             setTimeout(() => {
                 pickerInput.focus();

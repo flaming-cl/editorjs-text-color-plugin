@@ -4,6 +4,7 @@
 const Picker = require('./picker');
 const { markerIcon, textIcon } = require('./icons');
 const { getDefaultColorCache, handleCSSVariables } = require('./picker/utils/main');
+const {getColorsFromLocalStorage} = require("./localStorageService");
 require('./index.css').toString();
 
 /**
@@ -110,7 +111,9 @@ class Color {
         },
         hasCustomPicker: this.hasCustomPicker,
         defaultColor: this.config.defaultColor,
-        colorCollections: this.config.colorCollections,
+        allowUserCachedColors: this.config.allowUserCachedColors ?? false,
+        numberOfUserCachedColors: this.config.numberOfUserCachedColors ?? 0,
+        colorCollections: this.config.allowUserCachedColors ? (this.config.colorCollections ?? []).concat(getColorsFromLocalStorage()) : this.config.colorCollections,
         type: this.pluginType
       });
     }
